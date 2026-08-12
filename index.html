@@ -70,6 +70,17 @@ h2{margin:9px 0 6px;font-size:clamp(22px,4vw,29px);line-height:1.15;letter-spaci
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 button{border:1px solid var(--line);background:#142742;color:var(--text);padding:9px 11px;border-radius:10px;font-weight:750}
 .footer{text-align:center;color:#718399;font-size:11px;padding:30px 10px 0;line-height:1.6}
+
+.stopdetails{margin-top:8px;border:1px solid rgba(157,181,214,.14);border-radius:11px;background:rgba(6,16,29,.34);overflow:hidden}
+.stopdetails summary{display:flex;align-items:center;gap:7px;cursor:pointer;list-style:none;padding:9px 11px;color:#aebed1;font-size:11px;font-weight:800;letter-spacing:.025em;user-select:none}
+.stopdetails summary::-webkit-details-marker{display:none}
+.stopdetails summary:before{content:"＋";display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:rgba(85,230,182,.12);color:var(--accent);font-size:13px;line-height:1}
+.stopdetails[open] summary:before{content:"−"}
+.stopdetails[open] summary{color:#dce6f3;border-bottom:1px solid rgba(157,181,214,.11)}
+.stopdetails .note{margin:0;padding:10px 12px 12px;color:var(--muted)}
+.stopdetails .tiplabel{display:inline-block;margin:0 6px 5px 0;color:var(--accent);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.stopdetails summary:hover{background:rgba(255,255,255,.025)}
+
 @media(max-width:650px){
   .wrap{width:min(100% - 20px,1040px);padding-top:10px}
   .hero{padding:28px 22px 26px;border-radius:24px}.hero:after{font-size:100px;right:4px}.sub{font-size:14px}
@@ -85,7 +96,7 @@ button{border:1px solid var(--line);background:#142742;color:var(--text);padding
 <div class="nav">
 <a href="#Seúl">Seúl</a><a href="#Gyeongju">Gyeongju</a><a href="#Busan">Busan</a><a href="#Jeju">Jeju</a>
 </div>
-<div class="legend"><b>Cómo usarlo:</b> toca <b>Naver</b> para abrir la búsqueda del lugar. Las notas que escribas en cada día se guardan automáticamente en este navegador. Los días marcados “por afinar” son los que podemos seguir modificando.</div>
+<div class="legend"><b>Cómo usarlo:</b> toca <b>Naver</b> para abrir el lugar y despliega <b>Qué hacer · consejos · detalles</b> en cada parada. Las notas que escribas en cada día se guardan automáticamente en este navegador. Los días marcados “por afinar” son los que podemos seguir modificando.</div>
 <section class="day" id="Seúl">
 <div class="dayhead"><div><div class="date">Sáb 5 sep</div><div class="city">Seúl</div>
 <h2>Llegada · Myeongdong</h2></div><span class="badge">cerrado</span></div>
@@ -541,9 +552,26 @@ button{border:1px solid var(--line);background:#142742;color:var(--text);padding
 <div class="note">Vuelo de regreso.</div></div>
 <a class="map" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD">Naver ↗</a></div><textarea class="usernote" data-note="day12" placeholder="Notas de este día: reservas, restaurante, cambios, nº de tren..."></textarea>
 </section>
-<div class="footer">Versión 17 · Hannam e Itaewon añadidos como bloque flexible · Itinerario vivo con Google Maps y Naver.</div>
+<div class="footer">Versión 18 · Desplegables informativos añadidos a todas las paradas · Itinerario vivo con Google Maps y Naver.</div>
 </div>
 <script>
+
+document.querySelectorAll('.stop .note').forEach(note=>{
+  if(note.closest('.stopdetails')) return;
+  const details=document.createElement('details');
+  details.className='stopdetails';
+  const summary=document.createElement('summary');
+  summary.textContent='Qué hacer · consejos · detalles';
+  const content=document.createElement('div');
+  content.className='note';
+  const label=document.createElement('span');
+  label.className='tiplabel';
+  label.textContent='Plan';
+  content.append(label,document.createTextNode(note.textContent.trim()));
+  details.append(summary,content);
+  note.replaceWith(details);
+});
+
 document.querySelectorAll('.usernote').forEach(el=>{
   const k='korea2026_'+el.dataset.note;
   el.value=localStorage.getItem(k)||'';
