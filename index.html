@@ -4,61 +4,84 @@
 <title>Korea Trip 2026 · Javi</title>
 <style>
 :root{
-  --bg:#0c0f14;--card:#151922;--card2:#1b2130;--text:#f4f6fb;--muted:#9fa9ba;
-  --accent:#7bdcb5;--accent2:#8bb8ff;--warn:#ffd479;--line:#283044;
+  --bg:#07111f;--bg2:#0b1728;--surface:rgba(16,29,48,.88);--surface2:#12233a;
+  --text:#f7f9fc;--muted:#a8b6c9;--accent:#55e6b6;--accent2:#79a9ff;
+  --warm:#ffd37a;--line:rgba(157,181,214,.16);--shadow:0 22px 60px rgba(0,0,0,.28);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:linear-gradient(180deg,#0b0e13,#111722 45%,#0c0f14);color:var(--text);
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.wrap{max-width:980px;margin:auto;padding:20px 16px 80px}
-.hero{padding:24px 4px 16px}
-h1{font-size:34px;line-height:1.05;margin:0 0 10px}
-.sub{color:var(--muted);font-size:15px;line-height:1.5}
-.nav{display:flex;gap:8px;overflow:auto;padding:10px 0 18px;position:sticky;top:0;z-index:3;
-background:linear-gradient(180deg,rgba(12,15,20,.97),rgba(12,15,20,.84),rgba(12,15,20,0));backdrop-filter:blur(10px)}
-.nav a{white-space:nowrap;text-decoration:none;color:var(--text);background:#1a2130;border:1px solid var(--line);
-border-radius:999px;padding:9px 13px;font-size:13px}
-.day{background:rgba(21,25,34,.94);border:1px solid var(--line);border-radius:22px;padding:18px;margin:14px 0;box-shadow:0 12px 30px rgba(0,0,0,.18)}
-.dayhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.date{font-size:13px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-.city{color:var(--muted);font-size:13px}
-h2{margin:5px 0 5px;font-size:23px}
-.summary{color:var(--muted);margin:0 0 14px;font-size:14px;line-height:1.45}
-.badge{font-size:11px;padding:6px 9px;border-radius:999px;background:#222b3a;color:#d9e4f5;border:1px solid #33405a;white-space:nowrap}
-.stop{display:grid;grid-template-columns:92px 1fr auto;gap:12px;align-items:start;padding:13px 0;border-top:1px solid var(--line)}
-.time{font-weight:700;font-size:13px;color:var(--accent2);padding-top:3px}
-.stopname{font-weight:700;font-size:15px}
-.kr{font-weight:500;color:var(--muted);font-size:13px;margin-left:4px}
-.note{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.4}
-.map{display:inline-flex;align-items:center;text-decoration:none;color:#07100c;background:var(--accent);font-weight:800;
-font-size:12px;padding:8px 10px;border-radius:10px;white-space:nowrap}
-.usernote{width:100%;margin-top:12px;min-height:68px;resize:vertical;background:#0f141d;border:1px solid var(--line);
-border-radius:12px;color:var(--text);padding:11px;font:inherit;font-size:13px}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-button{border:1px solid var(--line);background:#1a2130;color:var(--text);padding:9px 11px;border-radius:10px;font-weight:700}
-.legend{background:#121824;border:1px dashed #34415a;border-radius:16px;padding:14px;color:var(--muted);font-size:13px;line-height:1.5}
-.footer{color:var(--muted);font-size:12px;padding:24px 4px}
-
-
-
-.daymap{height:390px;border-radius:16px;border:1px solid var(--line);overflow:hidden;margin:14px 0 8px;background:#0f141d}
-.daymap iframe{width:100%;height:100%;border:0;display:block}
-.mapcaption{font-size:12px;color:var(--muted);margin:0 0 10px;line-height:1.4}
-.mapactions{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 15px}
-.gmapsbtn,.naverbtn{display:inline-flex;align-items:center;text-decoration:none;font-weight:800;font-size:12px;padding:9px 11px;border-radius:10px}
-.gmapsbtn{background:#f4f6fb;color:#111827}
-.naverbtn{background:#7bdcb5;color:#07100c}
-@media(max-width:650px){.daymap{height:330px}}
-
-
-
-@media(max-width:650px){
-  h1{font-size:30px}.stop{grid-template-columns:76px 1fr}.map{grid-column:2;justify-self:start}.day{padding:16px 14px}.dayhead{display:block}.badge{display:inline-block;margin-top:6px}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{
+  margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 9% 0%,rgba(58,113,185,.28),transparent 28rem),
+    radial-gradient(circle at 92% 12%,rgba(45,211,159,.14),transparent 25rem),
+    linear-gradient(180deg,#07111f 0%,#0a1626 45%,#07111f 100%);
+  min-height:100vh;
 }
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,#000,transparent 65%)}
+.wrap{width:min(100% - 28px,1040px);margin:auto;padding:28px 0 90px;position:relative}
+.hero{
+  position:relative;overflow:hidden;padding:38px 34px 34px;margin-bottom:10px;border:1px solid var(--line);
+  border-radius:30px;background:linear-gradient(135deg,rgba(20,40,66,.96),rgba(11,24,41,.9));box-shadow:var(--shadow)
+}
+.hero:after{content:"🇰🇷";position:absolute;right:24px;bottom:-32px;font-size:130px;opacity:.09;filter:saturate(.7);transform:rotate(-8deg)}
+.hero .date{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+h1{font-size:clamp(34px,7vw,58px);line-height:.98;letter-spacing:-.045em;margin:10px 0 14px;max-width:720px}
+.sub{color:#c1ccdb;font-size:15px;line-height:1.65;max-width:670px;margin:0}
+.tripmeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.tripmeta span{padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line);color:#dce6f3;font-size:12px;font-weight:700}
+.nav{
+  display:flex;gap:8px;overflow:auto;padding:14px 4px 18px;position:sticky;top:0;z-index:20;
+  background:linear-gradient(180deg,rgba(7,17,31,.98) 65%,rgba(7,17,31,0));backdrop-filter:blur(16px);scrollbar-width:none
+}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;text-decoration:none;color:#dce6f3;background:rgba(19,37,61,.92);border:1px solid var(--line);border-radius:999px;padding:10px 15px;font-size:13px;font-weight:750;transition:.2s ease}
+.nav a:hover{color:#07111f;background:var(--accent);transform:translateY(-1px)}
+.legend{position:relative;background:rgba(18,35,58,.72);border:1px solid rgba(85,230,182,.24);border-radius:18px;padding:15px 18px 15px 48px;color:var(--muted);font-size:13px;line-height:1.55;margin:0 0 18px}
+.legend:before{content:"✦";position:absolute;left:18px;top:16px;color:var(--accent);font-size:18px}
+.legend b{color:#e8eef7}
+.day{
+  position:relative;background:linear-gradient(145deg,rgba(19,34,56,.94),rgba(12,25,43,.94));border:1px solid var(--line);
+  border-radius:26px;padding:24px;margin:18px 0;box-shadow:0 16px 45px rgba(0,0,0,.2);overflow:hidden
+}
+.day:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(var(--accent),var(--accent2));opacity:.85}
+.dayhead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.date{font-size:12px;color:var(--accent);font-weight:850;text-transform:uppercase;letter-spacing:.09em}
+.city{display:inline-block;color:#c7d4e4;font-size:11px;font-weight:700;margin-top:7px;padding:5px 8px;border-radius:7px;background:rgba(121,169,255,.1)}
+h2{margin:9px 0 6px;font-size:clamp(22px,4vw,29px);line-height:1.15;letter-spacing:-.025em}
+.summary{color:var(--muted);margin:8px 0 18px;font-size:14px;line-height:1.55;max-width:780px}
+.badge{font-size:10px;padding:7px 10px;border-radius:999px;background:rgba(255,211,122,.1);color:var(--warm);border:1px solid rgba(255,211,122,.25);white-space:nowrap;font-weight:800;text-transform:uppercase;letter-spacing:.045em}
+.daymap{height:390px;border-radius:18px;border:1px solid var(--line);overflow:hidden;margin:16px 0 9px;background:#0b1728;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.daymap iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.92) contrast(1.02)}
+.mapcaption{font-size:11px;color:#8798ae;margin:0 2px 10px;line-height:1.4}
+.mapactions{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+.gmapsbtn,.naverbtn,.map{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:850;font-size:11px;padding:9px 11px;border-radius:10px;transition:.18s ease}
+.gmapsbtn{background:#f5f7fb;color:#102036}
+.naverbtn,.map{background:var(--accent);color:#062019}
+.gmapsbtn:hover,.naverbtn:hover,.map:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.stop{display:grid;grid-template-columns:106px minmax(0,1fr) auto;gap:14px;align-items:start;padding:16px 2px;border-top:1px solid var(--line)}
+.time{font-weight:850;font-size:12px;color:var(--accent2);padding-top:3px;font-variant-numeric:tabular-nums}
+.stopname{font-weight:800;font-size:15px;line-height:1.35}
+.kr{font-weight:500;color:#8394aa;font-size:12px;margin-left:4px}
+.note{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.5}
+.usernote{width:100%;margin-top:10px;min-height:78px;resize:vertical;background:rgba(6,16,29,.72);border:1px solid var(--line);border-radius:14px;color:var(--text);padding:13px 14px;font:inherit;font-size:13px;outline:none;transition:.2s}
+.usernote:focus{border-color:rgba(85,230,182,.6);box-shadow:0 0 0 3px rgba(85,230,182,.08)}
+.usernote::placeholder{color:#6f8097}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button{border:1px solid var(--line);background:#142742;color:var(--text);padding:9px 11px;border-radius:10px;font-weight:750}
+.footer{text-align:center;color:#718399;font-size:11px;padding:30px 10px 0;line-height:1.6}
+@media(max-width:650px){
+  .wrap{width:min(100% - 20px,1040px);padding-top:10px}
+  .hero{padding:28px 22px 26px;border-radius:24px}.hero:after{font-size:100px;right:4px}.sub{font-size:14px}
+  .nav{margin:0 -2px;padding-top:11px}.day{padding:20px 15px 18px;border-radius:22px;margin:14px 0}
+  .dayhead{display:block}.badge{display:inline-block;margin-top:8px}.daymap{height:310px;border-radius:14px}
+  .stop{grid-template-columns:82px minmax(0,1fr);gap:10px;padding:15px 0}.map{grid-column:2;justify-self:start;margin-top:1px}
+  .kr{display:block;margin:3px 0 0}.mapactions a{flex:1;min-width:145px}.legend{padding-right:14px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.nav a,.map,.gmapsbtn,.naverbtn{transition:none}}
 </style></head><body><div class="wrap">
 <section class="hero"><div class="date">4–17 septiembre 2026</div><h1>🇰🇷 Korea Trip 2026</h1>
-<p class="sub">Itinerario vivo · Seúl · Busan · Gyeongju · Jeju. Pensado para móvil y con búsquedas directas en Naver Maps.</p></section>
+<p class="sub">Itinerario vivo · Seúl · Busan · Gyeongju · Jeju. Pensado para móvil y con búsquedas directas en Naver Maps.</p><div class="tripmeta"><span>13 días</span><span>4 destinos</span><span>2 viajeros</span><span>Septiembre 2026</span></div></section>
 <div class="nav">
 <a href="#Seúl">Seúl</a><a href="#Gyeongju">Gyeongju</a><a href="#Busan">Busan</a><a href="#Jeju">Jeju</a>
 </div>
@@ -376,7 +399,7 @@ button{border:1px solid var(--line);background:#1a2130;color:var(--text);padding
 <div class="note">Vuelo de regreso.</div></div>
 <a class="map" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD">Naver ↗</a></div><textarea class="usernote" data-note="day12" placeholder="Notas de este día: reservas, restaurante, cambios, nº de tren..."></textarea>
 </section>
-<div class="footer">Versión 6 · 12 agosto 2026 · Google Maps real embebido + rutas completas Google/Naver. Los horarios son de planificación y pueden ajustarse cuando cerremos reservas, cafés, restaurantes y transportes.</div>
+<div class="footer">Versión 7 · Diseño renovado el 12 de agosto de 2026 · Itinerario vivo con Google Maps y Naver.</div>
 </div>
 <script>
 document.querySelectorAll('.usernote').forEach(el=>{
