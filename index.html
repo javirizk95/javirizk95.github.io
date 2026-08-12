@@ -71,6 +71,21 @@ h2{margin:9px 0 6px;font-size:clamp(22px,4vw,29px);line-height:1.15;letter-spaci
 button{border:1px solid var(--line);background:#142742;color:var(--text);padding:9px 11px;border-radius:10px;font-weight:750}
 .footer{text-align:center;color:#718399;font-size:11px;padding:30px 10px 0;line-height:1.6}
 
+
+.cafebox{margin:15px 0 8px;border:1px solid rgba(255,211,122,.22);border-radius:16px;background:linear-gradient(145deg,rgba(38,31,24,.48),rgba(12,25,43,.5));overflow:hidden}
+.cafebox>summary{cursor:pointer;list-style:none;padding:14px 15px;color:#f3dfb3;font-size:12px;font-weight:900;letter-spacing:.025em;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cafebox>summary::-webkit-details-marker{display:none}
+.cafebox>summary:after{content:"＋";color:var(--warm);font-size:16px}.cafebox[open]>summary:after{content:"−"}
+.cafeintro{margin:0;padding:0 15px 12px;color:#8999ae;font-size:11px;line-height:1.5}
+.cafegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 12px 13px}
+.cafecard{position:relative;padding:12px;border:1px solid var(--line);border-radius:13px;background:rgba(7,17,31,.58)}
+.cafetop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.cafename{font-size:13px;font-weight:850;line-height:1.3}
+.cafetags{display:flex;gap:4px;flex-wrap:wrap;margin:7px 0}.cafetag{font-size:9px;font-weight:900;padding:4px 6px;border-radius:999px;background:rgba(85,230,182,.1);color:var(--accent);border:1px solid rgba(85,230,182,.18)}
+.cafetag.look{background:rgba(121,169,255,.1);color:var(--accent2);border-color:rgba(121,169,255,.2)}
+.cafetag.easy{background:rgba(255,211,122,.1);color:var(--warm);border-color:rgba(255,211,122,.2)}
+.cafedesc{font-size:11px;color:var(--muted);line-height:1.45;margin:0 0 9px}.cafelink{font-size:10px;font-weight:850;color:#07100c;background:var(--accent);text-decoration:none;padding:6px 8px;border-radius:8px;display:inline-flex}
+@media(max-width:650px){.cafegrid{grid-template-columns:1fr}.cafebox>summary{padding:13px}.cafecard{padding:11px}}
+
 .stopdetails{margin-top:8px;border:1px solid rgba(157,181,214,.14);border-radius:11px;background:rgba(6,16,29,.34);overflow:hidden}
 .stopdetails summary{display:flex;align-items:center;gap:7px;cursor:pointer;list-style:none;padding:9px 11px;color:#aebed1;font-size:11px;font-weight:800;letter-spacing:.025em;user-select:none}
 .stopdetails summary::-webkit-details-marker{display:none}
@@ -552,9 +567,111 @@ button{border:1px solid var(--line);background:#142742;color:var(--text);padding
 <div class="note">Vuelo de regreso.</div></div>
 <a class="map" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD">Naver ↗</a></div><textarea class="usernote" data-note="day12" placeholder="Notas de este día: reservas, restaurante, cambios, nº de tren..."></textarea>
 </section>
-<div class="footer">Versión 18 · Desplegables informativos añadidos a todas las paradas · Itinerario vivo con Google Maps y Naver.</div>
+<div class="footer">Versión 19 · Cuatro cafés flexibles añadidos a cada día · Itinerario vivo con Google Maps y Naver.</div>
 </div>
 <script>
+
+const cafeDays={
+day0:[
+["Coffee Libre Myeongdong","☕ café","Una de las referencias históricas del specialty coreano, junto a la catedral. Para filtro, espresso y comprar grano.","커피리브레 명동성당점"],
+["Molto Italian Espresso Bar","📸 espacio","Terraza elevada con encuadre de la catedral y Namsan. Más recomendable por vistas y fotos que por café de filtro.","몰또 이탈리안 에스프레소바"],
+["LUFT Coffee Myeongdong","☕📸 ambas","Espacio blanco, luminoso y cómodo; buena parada de café moderno muy cerca del alojamiento.","루프트커피 명동"],
+["The Spot Fabulous","📸 espacio","Edificio histórico frente a la catedral, interiores elegantes y repostería. Ideal para una primera tarde suave.","더스팟패뷸러스"]
+],
+day1:[
+["Cafe Onion Anguk","📸 espacio","Hanok muy fotogénico y bollería potente. Ya forma parte de la ruta; ir temprano para reducir cola.","카페 어니언 안국"],
+["Blue Bottle Samcheong","☕📸 ambas","Café consistente y arquitectura minimalista entre Gyeongbokgung y Bukchon.","블루보틀 삼청"],
+["Fritz Wonseo","☕📸 ambas","Specialty coreano serio dentro de una casa tradicional; muy buen equilibrio entre taza, panadería y espacio.","프릳츠 원서점"],
+["Milestone Coffee Hannam","☕ café","Microtostador con espresso y filtro; la mejor alternativa para que el bloque de Hannam tenga café realmente bueno.","마일스톤커피 한남"]
+],
+day2:[
+["Lowkey Seongsu","☕ café","Tostador local con muy buen espresso y filtro. Amplio para descansar durante el circuito de compras.","로우키 성수"],
+["Mesh Coffee","☕ café","Bar diminuto junto a Seoul Forest, centrado en tuestes claros y hand drip. Mejor como parada breve.","메쉬커피"],
+["MAAT Coffee Seongsu","☕📸 ambas","Café de especialidad con estética limpia y ambiente tranquilo; suele abrir antes que muchas tiendas.","마트커피 성수"],
+["NUDAKE · HAUS NOWHERE","📸 espacio","Postres conceptuales y escenario futurista dentro de la flagship. Elegirlo por la experiencia visual, no como la taza más técnica.","누데이크 하우스노웨어 서울"]
+],
+day3:[
+["Terarosa POSCO Center","☕📸 ambas","Specialty coreano rodeado de miles de libros y acero; encaja con COEX y Seonjeongneung.","테라로사 포스코센터점"],
+["Milestone Coffee Gangnam","☕ café","Microtostador fiable para espresso, flat white y filtro, sin depender de una cafetería puramente viral.","마일스톤커피 강남"],
+["Manufact Coffee Dosan","☕ café","Café enfocado en grano y extracción en la zona de Dosan; buena pausa entre tiendas.","매뉴팩트커피 도산"],
+["Café Kitsuné Seoul","📸 espacio","Patio y estética de Maison Kitsuné cerca de Dosan. Prioridad visual y de marca; fácil de combinar con BAPE y Stüssy.","카페키츠네 서울"]
+],
+day4:[
+["Café Saeraul","☕📸 ambas","La opción ya elegida: mansión de varias plantas, jardín, agua y bruma artificial. Reservarle 1–1,5 horas.","새라울"],
+["Anthracite Yeonhui","☕📸 ambas","Uno de los nombres fuertes del specialty coreano en un espacio industrial y tranquilo cerca de Saeraul.","앤트러사이트 연희점"],
+["Coffee Libre Yeonnam","☕ café","Pionero del specialty de Seúl: filtro, V60 y granos de compra directa. Para priorizar calidad de taza.","커피리브레 연남점"],
+["Coffee Nap Roasters Yeonnam","☕📸 ambas","Buen café y famoso suelo ondulado de ladrillo rojo; excelente combinación de diseño y specialty.","커피냅로스터스 연남"]
+],
+day5:[
+["Coffee Hanyakbang","📸 espacio","Ya incluida: botica retro escondida en un callejón. Mucho carácter; más experiencia y ambiente que precisión moderna.","커피한약방"],
+["Champ Coffee Euljiro","☕ café","Espresso intenso y ambiente industrial, muy coherente con el paseo por Hipjiro.","챔프커피 을지로"],
+["Horangii","☕📸 ambas","Pequeño local retro de Euljiro, conocido por su latte y estética setentera.","호랑이 을지로"],
+["Coffee Libre Myeongdong","☕ café","La alternativa más sólida si queréis una taza técnica durante el bloque de compras de Myeongdong.","커피리브레 명동성당점"]
+],
+day6:[
+["Coffee Libre Myeongdong","☕ café","Opción rápida y de calidad antes de abandonar Myeongdong; filtro, espresso y bolsas de grano.","커피리브레 명동성당점"],
+["Fritz Dohwa","☕📸 ambas","Hanok industrial, panadería y specialty coreano; posible si sobra tiempo antes del KTX, pero requiere pequeño desvío.","프릳츠 도화점"],
+["Blackup Coffee Seomyeon","☕ café","Institución cafetera de Busan y alternativa cómoda al llegar a Seomyeon.","블랙업커피 서면"],
+["Strut Coffee Jeonpo","☕📸 ambas","Tostador muy valorado, pour-over y casa reformada en Jeonpo. Excelente para la primera noche si llegáis con energía.","스트럿커피 전포"]
+],
+day7:[
+["Hyangmisa","☕ café","Una de las referencias de café de especialidad de Gyeongju; priorizar filtro o espresso.","향미사"],
+["Coffee Place","☕ café","Café centrado en la taza y valorado por sus extracciones; buena pausa cerca del centro histórico.","커피플레이스 경주"],
+["Slowbar Coffee","☕ café","Bar tranquilo cerca de Hwangnidan-gil, adecuado para una parada breve sin convertirla en sesión de fotos.","슬로우바 커피 경주"],
+["EYST 1779","📸 espacio","Hanok contemporáneo y patio estético en Hwangnidan-gil. Elegirlo por arquitectura y descanso.","이스트 1779"]
+],
+day8:[
+["Momos Coffee Yeongdo","☕📸 ambas","Proyecto de una campeona mundial de barismo; café de máximo nivel y entorno portuario. Encaja mejor tras Jagalchi, con taxi corto.","모모스커피 영도"],
+["Blackup Coffee Haeundae","☕ café","Specialty fiable y accesible durante el bloque de Haeundae.","블랙업커피 해운대"],
+["BDD Coffee Cheongsapo","📸 espacio","Ventanas hacia los faros de Cheongsapo; perfecta al bajar de la Sky Capsule, principalmente por vistas.","BDD 카페 청사포"],
+["Cup & Cup Gwangalli","📸 espacio","Plantas altas y terraza con vista frontal al puente de Gwangan; buena opción para el final nocturno.","컵앤컵 광안리"]
+],
+day9:[
+["Coffee Nap Roasters Aewol","☕📸 ambas","La opción de café serio en Aewol: tostador reconocido y espacio cuidado.","커피냅로스터스 제주 애월"],
+["Bomnal Cafe","📸 espacio","Clásico frente al mar en Handam; colorido y fotogénico, mejor por ubicación que por specialty.","봄날카페 애월"],
+["Lazy Pump","☕📸 ambas","Antigua piscifactoría convertida en café industrial junto al mar; ambiente diferente y menos pulido.","레이지펌프 애월"],
+["Ultra Marine","📸 espacio","Arquitectura brutalista y grandes vistas de la costa oeste cerca de Hyeopjae.","울트라마린 제주"]
+],
+day10:[
+["Walk In Coffee Bar","☕ café","Bar de especialidad próximo a Seongsan; café preparado con atención y sin depender solo de la vista.","워크인커피바 성산"],
+["Fritz Coffee Jeju Seongsan","☕📸 ambas","Café coreano de primer nivel con vistas hacia Seongsan Ilchulbong; elección muy completa.","프릳츠 제주 성산"],
+["ORRRN","📸 espacio","Arquitectura minimalista frente a la costa de Seopjikoji. Prioridad alta para fotos y paisaje.","오르다 카페 섭지코지"],
+["Cafe Delmoondo Hamdeok","📸 espacio","Terraza literalmente sobre el agua turquesa de Hamdeok; buena parada opcional de regreso.","카페 델문도 함덕"]
+],
+day11:[
+["Coffee Libre Yeonnam","☕ café","La prioridad si queréis café de especialidad real: direct trade, filtro, espresso y compra de grano.","커피리브레 연남점"],
+["Anthracite Seogyo","☕📸 ambas","Tostador emblemático dentro de una antigua fábrica; ambiente industrial muy marcado.","앤트러사이트 서교점"],
+["Coffee Nap Roasters Yeonnam","☕📸 ambas","Specialty con el conocido interior de ladrillo ondulado; buen equilibrio entre fotos y taza.","커피냅로스터스 연남"],
+["Cafe Layered Yeonnam","📸 espacio","Casa de estética británica y mostrador de tartas. Elegir por repostería y fotos, no como la opción más técnica.","카페 레이어드 연남"]
+],
+day12:[
+["Coffee@Works · ICN T2","☕ logística","La opción aeroportuaria más orientada al café antes del vuelo. Confirmar ubicación exacta tras seguridad.","커피앳웍스 인천공항 제2터미널"],
+["Starbucks · ICN T2","☕ logística","Respaldo sencillo y previsible dentro de la Terminal 2.","스타벅스 인천공항 T2"],
+["Paris Baguette · ICN T2","🥐 desayuno","Útil para café más desayuno rápido antes del embarque.","파리바게뜨 인천공항 제2터미널"],
+["Dunkin · ICN T2","🥐 desayuno","Último recurso práctico si las otras opciones quedan lejos de la puerta; no es una recomendación specialty.","던킨 인천공항 제2터미널"]
+]
+};
+const tagClass=t=>t.includes('espacio')?'look':(t.includes('logística')||t.includes('desayuno'))?'easy':'';
+document.querySelectorAll('.day').forEach(day=>{
+ const note=day.querySelector('.usernote')?.dataset.note;
+ const cafes=cafeDays[note]; if(!cafes||day.querySelector('.cafebox')) return;
+ const box=document.createElement('details'); box.className='cafebox';
+ const sum=document.createElement('summary'); sum.innerHTML='<span>☕ Cafés por la zona · 4 opciones flexibles</span>';
+ const intro=document.createElement('p'); intro.className='cafeintro'; intro.textContent='No son cuatro paradas obligatorias: elige una según horario, antojo y ruta. ☕ prioriza la taza · 📸 prioriza el espacio.';
+ const grid=document.createElement('div'); grid.className='cafegrid';
+ cafes.forEach(([name,tag,desc,q])=>{
+  const card=document.createElement('article'); card.className='cafecard';
+  const t=document.createElement('div'); t.className='cafetop'; t.innerHTML='<div class="cafename">'+name+'</div>';
+  const tags=document.createElement('div'); tags.className='cafetags';
+  tag.split(' ').filter(Boolean).forEach(v=>{const s=document.createElement('span');s.className='cafetag '+tagClass(v);s.textContent=v;tags.append(s)});
+  const p=document.createElement('p');p.className='cafedesc';p.textContent=desc;
+  const a=document.createElement('a');a.className='cafelink';a.target='_blank';a.rel='noopener';a.href='https://map.naver.com/p/search/'+encodeURIComponent(q);a.textContent='Naver ↗';
+  card.append(t,tags,p,a);grid.append(card);
+ });
+ box.append(sum,intro,grid);
+ day.querySelector('.usernote').before(box);
+});
+
 
 document.querySelectorAll('.stop .note').forEach(note=>{
   if(note.closest('.stopdetails')) return;
